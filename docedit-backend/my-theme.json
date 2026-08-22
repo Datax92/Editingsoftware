@@ -1,0 +1,11 @@
+{
+  "name": "App Custom Theme",
+  "id": "theme-myapp-custom",
+  "type": "light",
+  "colors": {
+    "toolbar-header-document": "#ffffff",
+    "toolbar-background": "#f2f4f8",
+    "doc-background": "#ffffff",
+    "tab-background-active": "#ffffff"
+  }
+}
