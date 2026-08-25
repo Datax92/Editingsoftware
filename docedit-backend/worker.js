@@ -1,11 +1,15 @@
+import Redis from 'ioredis';
 const { Worker } = require('bullmq');
 const fs = require('fs');
 
-const redisConnection = process.env.REDIS_URL || { 
-  host: process.env.REDIS_HOST || 'localhost', 
-  port: process.env.REDIS_PORT || 6379,
-  password: process.env.REDIS_PASSWORD 
-};
+// If REDIS_URL exists, parse it properly or pass it directly; otherwise use the object fallback
+const redisConnection = process.env.REDIS_URL 
+  ? process.env.REDIS_URL 
+  : { 
+      host: process.env.REDIS_HOST || 'localhost', 
+      port: process.env.REDIS_PORT || 6379,
+      password: process.env.REDIS_PASSWORD 
+    };
 
 const worker = new Worker('ocr-processing-queue', async (job) => {
   console.log(`Processing OCR background job ID: ${job.id} for file: ${job.data.originalName}`);
