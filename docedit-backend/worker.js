@@ -19,7 +19,7 @@ const worker = new Worker('ocr-processing-queue', async (job) => {
   await new Promise(resolve => setTimeout(resolve, 5000));
 
   // Ephemeral file clean-up post processing
-  if (fs.existsSync(job.data.filePath)) {
+  if (job.data?.filePath && fs.existsSync(job.data.filePath)) {
     fs.unlinkSync(job.data.filePath);
   }
 
